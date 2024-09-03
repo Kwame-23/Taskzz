@@ -14,7 +14,7 @@ if (isset($_POST["login"])) {
     }
 
     // Query to check if the user exists
-    $sql_query = "SELECT * FROM Users WHERE email = ?";
+    $sql_query = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql_query);
     $stmt->bind_param("s", $email);
     $stmt->execute();

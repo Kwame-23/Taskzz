@@ -19,7 +19,7 @@ if (isset($_POST['register'])) {
     }
 
     // Check if the email is already registered
-    $sql = "SELECT * FROM Users WHERE email = ?";
+    $sql = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -34,7 +34,7 @@ if (isset($_POST['register'])) {
     $hashpassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert the new user into the database
-    $stmt = $conn->prepare("INSERT INTO Users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $fname, $lname, $email, $hashpassword);
 
     if ($stmt->execute()) {
