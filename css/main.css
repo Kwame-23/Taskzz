@@ -1,3 +1,6 @@
+body {
+  font-family: 'Orbitron', sans-serif;
+}
 header {
   display: flex;
   justify-content: space-between;
@@ -67,6 +70,8 @@ header {
     width: 50%;
     margin: 40px auto;
     margin-top: 20%;
+    cursor: pointer;
+
   }
   
   #project-title {
@@ -74,6 +79,8 @@ header {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
+    cursor: pointer;
+
   }
   
   #create-project, #cancel {

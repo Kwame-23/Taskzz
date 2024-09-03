@@ -11,11 +11,13 @@
             flex-wrap: wrap;
             gap: 15px;
             margin-top: 20px;
+            cursor: pointer;
+            padding: 0 50px;
         }
         .project-bubble {
             background-color: #f0f0f0;
             border-radius: 15px;
-            padding: 15px;
+            padding: 20px;
             width: 250px;
             text-align: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -63,7 +65,7 @@
             $projects = getProjects($id);
             if (!empty($projects)) {
                 foreach ($projects as $project) {
-                    echo "<div class='project-bubble'>$project</div>";
+                  echo "<a href='tasks.php' class='project-bubble'>$project</a>";
                 }
             } else {
                 echo "<p>No projects found.</p>";
