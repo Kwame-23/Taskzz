@@ -1,0 +1,71 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+body {
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: oldlace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+}
+
+
+
+h1 {
+    color: #020000;
+    font-size: 36px;
+    margin: 10px 0;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 50px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #34495e;
+    border-radius: 15px;
+    outline: none;
+    font-size: 16px;
+    width: 50%;
+    /*background-color: #1c6691;*/
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #2980b9;
+}
+
+button {
+    background-color: #1e5071;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #7f99a7;
+}
+
+/*::placeholder {
+    color: #ffffff;
+}*/
