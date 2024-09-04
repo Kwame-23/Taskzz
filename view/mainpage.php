@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Projectsg</title>
+    <title>Projects</title>
     <link rel="stylesheet" href="../css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -61,16 +61,17 @@
 
     <!-- Project Container -->
     <div class="project-container">
-        <?php
-            $projects = getProjects($id);
-            if (!empty($projects)) {
-                foreach ($projects as $project) {
-                  echo "<a href='tasks.php' class='project-bubble'>$project</a>";
-                }
-            } else {
-                echo "<p>No projects found.</p>";
-            }
-        ?>
+    <?php
+    $projects = getProjects($id);
+    
+    if (!empty($projects)) {
+        foreach ($projects as $project_id => $project_name) {
+            echo "<a href='tasks.php?project_id=" . $project_id+1 . "' class='project-bubble'>" . htmlspecialchars($project_name) . "</a>";
+        }
+    } else {
+        echo "<p>No projects found.</p>";
+    }
+?>
     </div>
 
     <script src="../js/main.js"></script>

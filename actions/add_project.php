@@ -12,7 +12,7 @@ if (isset($_POST['create-project'])) {
         exit();
     }
 
-    $sql = "INSERT INTO lists (name,user_id) VALUES (?,?)";
+    $sql = "INSERT INTO Projects (name,user_id) VALUES (?,?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $projectTitle, $userID);
 
