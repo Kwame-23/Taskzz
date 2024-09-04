@@ -3,7 +3,7 @@ include '../settings/connection.php';
 function getProjects($user_id) {
     global $conn;
 
-    $stmt = $conn->prepare("SELECT name FROM lists WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT name FROM Projects WHERE user_id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
