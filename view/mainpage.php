@@ -8,6 +8,7 @@ ini_set('display_errors', 1);
 include '../settings/connection.php';
 include '../functions/getProfile.php';
 include '../functions/getProjects.php';
+include '../functions/get_sharedProjects.php';
 include '../functions/getTasks.php';
 
 // Check if user is logged in
@@ -28,6 +29,12 @@ if ($userName === "User not found" || empty($userName)) {
 $projects = getProjects($userID);
 if ($projects === false) {
     echo "Error: Unable to fetch projects.";
+    exit();
+}
+
+$sharedProjects = get_sharedProjects($userID);
+if ($sharedProjects === false) {
+    echo "Error: Unable to fetch shared projects.";
     exit();
 }
 ?>
@@ -207,11 +214,13 @@ if ($projects === false) {
     <?php else: ?>
         <div class="projects-container">
             <?php foreach ($projects as $project): ?>
+                
                 <div class="project">
                     <button class="project-btn" onclick="toggleDropdown('<?php echo htmlspecialchars($project['id']); ?>')">
                         <?php echo htmlspecialchars($project['name']); ?>
                     </button>
                     <button class="trash-icon" onclick="confirmDeleteProject(<?php echo htmlspecialchars($project['id']); ?>)">🗑️</button>
+                    <button class="trash-icon" onclick="location.href='../view/share.php?project_id=<?php echo htmlspecialchars($project['id']); ?>'">🫶🏼</button>
                     <div id="<?php echo htmlspecialchars($project['id']); ?>" class="tasks-dropdown">
                         <!-- Tasks will be dynamically loaded here -->
                         <div class="no-tasks">
@@ -224,6 +233,8 @@ if ($projects === false) {
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
+
+
 </main>
 
 <!-- Floating Action Button to Add Project -->
@@ -239,6 +250,37 @@ if ($projects === false) {
             <button type="submit" name="create-project">Add Project</button>
         </form>
     </div>
+</div>
+
+<div>
+    <p>Shared Projects</p>
+    <?php if (empty($projects)): ?>
+        <div class="no-projects">
+            <img src="../images/no-projects.png" alt="No Projects Found">
+            <p>No projects found.</p>
+        </div>
+    <?php else: ?>
+        <div class="projects-container">
+            <?php foreach ($sharedProjects as $sharedProject): ?>
+                <div class="project">
+                    <button class="project-btn" onclick="toggleDropdown('<?php echo htmlspecialchars($sharedProject['id']); ?>')">
+                        <?php echo htmlspecialchars($sharedProject['name']); ?>
+                    </button>
+                    <button class="trash-icon" onclick="confirmDeleteProject(<?php echo htmlspecialchars($sharedProject['id']); ?>)">🗑️</button>
+                    <button class="trash-icon" onclick="location.href='../view/share.php?project_id=<?php echo htmlspecialchars($sharedProject['id']); ?>'">🫶🏼</button>
+                    <div id="<?php echo htmlspecialchars($sharedProject['id']); ?>" class="tasks-dropdown">
+                        <!-- Tasks will be dynamically loaded here -->
+                        <div class="no-tasks">
+                            <p>Select this project to view tasks.</p>
+                        </div>
+                        <!-- Add Task button will be appended dynamically -->
+                        <button class="add-task-btn" onclick="location.href='../view/task.php?project_id=<?php echo htmlspecialchars($project['id']); ?>'">Add Task</button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
 </div>
 
 <script>
