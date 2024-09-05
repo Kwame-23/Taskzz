@@ -12,11 +12,10 @@ function getFName($user_id) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $name = $row["firstname"];
-
-        echo $name;
     } else {
-        echo "User not found";
+        $name = "User not found";
     }
 
     $stmt->close();
+    return $name; // Return the name instead of echoing it
 }
