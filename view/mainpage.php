@@ -61,7 +61,7 @@
 
     <div class="project-container">
         <?php
-        include("../setings/connection.php");  
+        include("../settings/connection.php");  
         $projects = getProjects($id);
         
         if (!empty($projects)) {
