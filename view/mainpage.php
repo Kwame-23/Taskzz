@@ -31,23 +31,23 @@
     </style>
 </head>
 <body>
-    <header style="background-color: beige ; height:50px;">
-        <h1 id="welcome-message" style="display: inline-block; margin: 0 auto; font-size: 28px;">Welcome, <?php 
-            session_start();
-            include("../functions/getProfile.php");
-            include("../functions/getProjects.php");
-            $id=$_SESSION['user_id'];
-            getFName($id); 
-        ?>!</h1>
+    <header style="background-color: beige; height:50px;">
+        <h1 id="welcome-message" style="display: inline-block; margin: 0 auto; font-size: 28px;">
+            Welcome, <?php 
+                session_start();
+                include("../functions/getProfile.php");
+                include("../functions/getProjects.php");
+                $id = $_SESSION['user_id'];
+                getFName($id); 
+            ?>!
+        </h1>
         <a href="../login/logout.php" style="float: right; color: black; text-decoration: underline; font-size: 24px;">
             <i class="fas fa-sign-in-alt"></i> Logout
         </a>
     </header>
 
-    <!-- Add Project Button -->
     <button id="add-button">+</button>
 
-    <!-- The popup screen -->
     <div id="popup-screen" class="hidden">
         <div class="popup-content">
             <form action="../actions/add_project.php" method="POST">
@@ -59,8 +59,8 @@
         </div>
     </div>
 
-    <!-- Project Container -->
     <div class="project-container">
+<<<<<<< HEAD
     <?php
     $projects = getProjects($id);
     
@@ -72,6 +72,28 @@
         echo "<p>No projects found.</p>";
     }
 ?>
+=======
+        <?php
+        include("../db_connection.php");  
+        $projects = getProjects($id);
+        
+        if (!empty($projects)) {
+            foreach ($projects as $project_name) {
+                // SQL query to get the project ID by its name
+                $stmt = $conn->prepare("SELECT id FROM Projects WHERE name = ? AND user_id = ?");
+                $stmt->bind_param("si", $project_name, $id);
+                $stmt->execute();
+                $stmt->bind_result($project_id);
+                $stmt->fetch();
+                $stmt->close();
+                
+                echo "<a href='tasks.php?project_id=" . $project_id . "' class='project-bubble'>" . htmlspecialchars($project_name) . "</a>";
+            }
+        } else {
+            echo "<p>No projects found.</p>";
+        }
+        ?>
+>>>>>>> Kwame
     </div>
 
     <script src="../js/main.js"></script>
