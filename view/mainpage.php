@@ -60,19 +60,6 @@
     </div>
 
     <div class="project-container">
-<<<<<<< HEAD
-    <?php
-    $projects = getProjects($id);
-    
-    if (!empty($projects)) {
-        foreach ($projects as $project_id => $project_name) {
-            echo "<a href='tasks.php?project_id=" . $project_id+1 . "' class='project-bubble'>" . htmlspecialchars($project_name) . "</a>";
-        }
-    } else {
-        echo "<p>No projects found.</p>";
-    }
-?>
-=======
         <?php
         include("../db_connection.php");  
         $projects = getProjects($id);
@@ -93,7 +80,6 @@
             echo "<p>No projects found.</p>";
         }
         ?>
->>>>>>> Kwame
     </div>
 
     <script src="../js/main.js"></script>
