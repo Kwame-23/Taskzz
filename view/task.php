@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="profile">
         <img src="../images/profile.png" alt="Profile Picture" class="avatar">
         <span>Welcome, <?php echo htmlspecialchars($userName); ?>!</span>
-        <button onclick="location.href='../actions/logout.php'" class="logout">Logout</button>
+        <button onclick="location.href='../login/logout.php'" class="logout">Logout</button>
     </div>
 </header>
 
