@@ -27,6 +27,6 @@ if (isset($_POST['addTask'])) {
         exit();
     }
 } else {
-    header("Location: ../view/tasks.php");
+    header("Location: ../view/tasks.php?project_id=" . urlencode($listID)  . "&msg=" . urlencode("Error adding task, please try again."));
     exit();
 }
