@@ -349,7 +349,7 @@ footer {
                     </button>
                     <button class="trash-icon" onclick="confirmDeleteProject(<?php echo htmlspecialchars($sharedProject['id']); ?>)">🗑️</button>
                     <button class="trash-icon" onclick="location.href='../view/share.php?project_id=<?php echo htmlspecialchars($sharedProject['id']); ?>'">🫶🏼</button>
-                    <p>Created by : </p>
+                    <!-- <p>Created by : </p> -->
                     <div id="tasks-<?php echo htmlspecialchars($sharedProject['id']); ?>" class="tasks-dropdown">
                         <!-- Tasks will be dynamically loaded here -->
                         <div class="no-tasks">
