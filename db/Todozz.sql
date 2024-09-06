@@ -58,3 +58,11 @@ CREATE TABLE archived_tasks (
     deleted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (project_id) REFERENCES Projects(id) ON DELETE CASCADE
 );
+
+CREATE TABLE transactionz (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    daytransacted DATE NOT NULL DEFAULT (CURRENT_DATE), -- Set to the current date at the time of insertion
+    token VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);

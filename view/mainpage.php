@@ -262,8 +262,26 @@ footer {
     color: #666; /* Optional: make the description look different */
 }
 
+.premium {
+  position: absolute; /* Positions the button relative to the nearest positioned ancestor */
+  top: 60px; /* Adjusts the vertical distance from the top of the screen */
+  right: 20px; /* Adjusts the horizontal distance from the left side of the screen */
+  padding: 10px 20px; /* Adds some padding around the text */
+  background-color: #28a745;
+  color: white;
+  border: 1px solid #a88734; /* Border styling */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Changes cursor to a pointer on hover */
+  font-size: 16px; /* Font size for the button text */
+  margin-top: 3%;
+}
 
-    </style>
+.premium:hover {
+  background-color: #218838;
+}
+
+
+</style>
 </head>
 <body>
 
@@ -272,19 +290,21 @@ footer {
     <div class="profile">
         <span><?php echo htmlspecialchars($userName); ?></span>
         <button onclick="location.href='../view/trash.php'" class="logout">Trash</button>
-        <button onclick="location.href='../actions/logout.php'" class="logout">Logout</button>
+        <button onclick="location.href='../login/logout.php'" class="logout">Logout</button>
         
     </div>
+
 </header>
 
 <main>
+<button onclick="location.href='../actions/checkPremiumbeforepayment.php?user_id=<?php echo urlencode($userID); ?>'" class="premium">To Premium</button>
+
     <div class="welcome-message">
-        <h2>Welcome, <?php echo htmlspecialchars($userName); ?> 👋</h2>
-    </div>
+    <h2>Welcome, <?php echo htmlspecialchars($userName); ?> 👋</h2>
 </main>
 
 <section>
-<p>Created Projects</p>
+<p><strong>Created Projects</strong></p>
     <?php if (empty($projects)): ?>
         <div class="no-projects">
             <img src="../images/no-task.png" alt="No Projects Found">
@@ -298,7 +318,7 @@ footer {
                         <?php echo htmlspecialchars($project['name']); ?>
                     </button>
                     <button class="trash-icon" onclick="confirmDeleteProject(<?php echo htmlspecialchars($project['id']); ?>)">🗑️</button>
-                    <button class="trash-icon" onclick="location.href='../view/share.php?project_id=<?php echo htmlspecialchars($project['id']); ?>'">🫶🏼</button>
+                    <button class="trash-icon" onclick="location.href='../actions/checkpaymentbeforeshare.php?user_id=<?php echo urlencode($userID); ?>&project_id=<?php echo htmlspecialchars($project['id']); ?>'">🫶🏼</button>
                     <div id="tasks-<?php echo htmlspecialchars($project['id']); ?>" class="tasks-dropdown">
                         <!-- Tasks will be dynamically loaded here -->
                         <div class="no-tasks">
@@ -314,7 +334,7 @@ footer {
 </section>
 
 <section>
-<p>Shared Projects</p>
+<p><strong></strong>Shared Projects</p>
     <?php if (empty($projects)): ?>
         <div class="no-projects">
             <img src="../images/no-task.png" alt="No Projects Found">
@@ -329,6 +349,7 @@ footer {
                     </button>
                     <button class="trash-icon" onclick="confirmDeleteProject(<?php echo htmlspecialchars($sharedProject['id']); ?>)">🗑️</button>
                     <button class="trash-icon" onclick="location.href='../view/share.php?project_id=<?php echo htmlspecialchars($sharedProject['id']); ?>'">🫶🏼</button>
+                    <p>Created by : </p>
                     <div id="tasks-<?php echo htmlspecialchars($sharedProject['id']); ?>" class="tasks-dropdown">
                         <!-- Tasks will be dynamically loaded here -->
                         <div class="no-tasks">
@@ -464,4 +485,3 @@ function closePopup() {
 </script>
 </body>
 </html>
-

@@ -1,0 +1,13 @@
+POST https://sandbox.expresspaygh.com/api/submit.php
+Content-Type: application/x-www-form-urlencoded
+
+# merchant-id=564265612872&api-key=06K1VG9VpSdY3hfqjgNVF-QkLlGadW7tlUvdT53iAB-7ikCeyoT8bLrsu6WKogt-BIjRAF4TRJHVRihjA9m&firstname=Kwame&lastname=Brett&email=kwamebrett22%40gmail.com&phonenumber=0203457890&currency=GHS&amount=934&order-id=90bffe561179ed97&redirect-url=https%3A%2F%2Fwww.google.com&post-url=90bffe561179ed97&accountnumber=90bffe561179ed97z
+
+###
+POST https://sandbox.expresspaygh.com/api/checkout.php
+Content-Type: application/x-www-form-urlencoded
+
+token=100064bfad34727ee1.4771360164bfad34727f96.35576337270064bfad3472
+
+
+##
