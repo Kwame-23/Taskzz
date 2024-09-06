@@ -36,7 +36,7 @@ $merchantID = "564265612872";
 $apiKey = "06K1VG9VpSdY3hfqjgNVF-QkLlGadW7tlUvdT53iAB-7ikCeyoT8bLrsu6WKogt-BIjRAF4TRJHVRihjA9m";
 $currency = "GHS";
 $amount = 50; // Set amount to 50
-$redirectURL = "http://localhost/ToDo_List/Taskzz/actions/confirmpayment.php"; // Redirect URL to Google
+$redirectURL = "http://13.49.18.226//ToDo_List/Taskzz/actions/confirmpayment.php"; // Redirect URL to Google
 
 // Set up cURL
 $curl = curl_init();
