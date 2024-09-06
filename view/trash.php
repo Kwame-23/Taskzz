@@ -73,45 +73,142 @@ $archivedTasks = getArchivedTasks($userID);
     <title>Trash</title>
     <link rel="stylesheet" href="../css/mainpage.css">
     <style>
-        .trash-container {
-            margin: 20px;
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
         }
-        .trash-item {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .trash-item h3 {
-            margin-top: 0;
+
+        .logo {
+            width: 150px;
         }
-        .trash-item button {
-            margin-right: 10px;
-            padding: 5px 10px;
-            border: none;
+
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .logout {
+            background-color: #2ecc71;
             color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
             cursor: pointer;
+            font-size: 16px;
         }
+
+        .logout:hover {
+            background-color: #27ae60;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+            border-bottom: 2px solid #dedede;
+            padding-bottom: 10px;
+        }
+
+        .trash-container {
+            margin-bottom: 40px;
+        }
+
+        .trash-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #dedede;
+        }
+
+        .trash-item h3 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .trash-item button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+        }
+
         .recover-btn {
-            background-color: #28a745;
+            background-color: #2ecc71;
         }
+
+        .recover-btn:hover {
+            background-color: #27ae60;
+        }
+
         .delete-btn {
             background-color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .trash-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .trash-item button {
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="../images/logo.png" alt="Logo" class="logo">
+    <img src="../images/listaviva-2.svg" alt="Logo" class="logo">
     <div class="profile">
         <img src="../images/profile.png" alt="Profile Picture" class="avatar">
         <span>Welcome, <?php echo htmlspecialchars($userName); ?>!</span>
-        <button onclick="location.href='../login/logout.php'" class="logout">Logout</button>
+        <button onclick="location.href='../actions/logout.php'" class="logout">Logout</button>
     </div>
 </header>
 
 <main>
+    <!-- Archived Projects Section -->
     <div class="trash-container">
         <h2>Archived Projects</h2>
         <?php if (empty($archivedProjects)): ?>
@@ -120,13 +217,16 @@ $archivedTasks = getArchivedTasks($userID);
             <?php foreach ($archivedProjects as $project): ?>
                 <div class="trash-item">
                     <h3><?php echo htmlspecialchars($project['name']); ?></h3>
-                    <button class="recover-btn" onclick="recoverItem('project', <?php echo $project['id']; ?>)">Recover</button>
-                    <button class="delete-btn" onclick="deleteItem('project', <?php echo $project['id']; ?>)">Delete Forever</button>
+                    <div>
+                        <button class="recover-btn" onclick="recoverItem('project', <?php echo $project['id']; ?>)">Recover</button>
+                        <button class="delete-btn" onclick="deleteItem('project', <?php echo $project['id']; ?>)">Delete Forever</button>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
 
+    <!-- Archived Tasks Section -->
     <div class="trash-container">
         <h2>Archived Tasks</h2>
         <?php if (empty($archivedTasks)): ?>
@@ -135,8 +235,10 @@ $archivedTasks = getArchivedTasks($userID);
             <?php foreach ($archivedTasks as $task): ?>
                 <div class="trash-item">
                     <h3><?php echo htmlspecialchars($task['name']); ?></h3>
-                    <button class="recover-btn" onclick="recoverItem('task', <?php echo $task['id']; ?>)">Recover</button>
-                    <button class="delete-btn" onclick="deleteItem('task', <?php echo $task['id']; ?>)">Delete Forever</button>
+                    <div>
+                        <button class="recover-btn" onclick="recoverItem('task', <?php echo $task['id']; ?>)">Recover</button>
+                        <button class="delete-btn" onclick="deleteItem('task', <?php echo $task['id']; ?>)">Delete Forever</button>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
@@ -152,7 +254,7 @@ function recoverItem(type, id) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                location.reload(); // Refresh the page to reflect changes
+                location.reload();
             } else {
                 alert('Error recovering item.');
             }
@@ -172,7 +274,7 @@ function deleteItem(type, id) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                location.reload(); // Refresh the page to reflect changes
+                location.reload();
             } else {
                 alert('Error deleting item forever.');
             }

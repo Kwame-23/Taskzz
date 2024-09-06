@@ -111,21 +111,170 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $isEdit ? 'Edit Task' : 'Add Task'; ?></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/mainpage.css">
+    <style>
+        /* General styling */
+body {
+
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffff;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #dedede;
+    align-items: center;
+}
+
+.logo {
+    width: 150px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.logout {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+main {
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight:100;
+    margin-top: 40px;
+    color: #2ecc71;
+}
+
+form {
+    width: 50%;
+}
+
+form label {
+    font-size: 18px;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input[type="text"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+form input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+form button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+form button:hover {
+    background-color: #27ae60;
+}
+
+.image-section {
+    width: 40%;
+    text-align: center;
+}
+
+.image-section img {
+    width: 100%;
+}
+
+/* Specific for the "Back" button */
+.back-button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 18px;
+}
+
+.back-button:hover {
+    background-color: #27ae60;
+}
+
+/* Responsive styling */
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .image-section {
+        display: none;
+    }
+}
+
+
+    </style>
 </head>
 <body>
 
 <header>
-    <img src="../images/logo.png" alt="Logo" class="logo">
+    <img src="../images/listaviva-2.svg" alt="Logo" class="logo">
     <div class="profile">
         <img src="../images/profile.png" alt="Profile Picture" class="avatar">
         <span>Welcome, <?php echo htmlspecialchars($userName); ?>!</span>
-        <button onclick="location.href='../login/logout.php'" class="logout">Logout</button>
+        <button onclick="location.href='../actions/logout.php'" class="logout">Logout</button>
     </div>
 </header>
 
+<h2 style="margin-left: 40px; font-weight: 4px;"><?php echo $isEdit ? 'Edit Task' : 'Create A Task'; ?></h2>
 <main>
-    <h1><?php echo $isEdit ? 'Edit Task' : 'Add Task'; ?></h1>
+    
+    
     <form action="task.php<?php echo $isEdit ? '?task_id=' . $taskID : ''; ?>" method="post">
         <label for="task-name">Task Name:</label>
         <input type="text" id="task-name" name="task-name" value="<?php echo $isEdit ? htmlspecialchars($task['name'] ?? '', ENT_QUOTES, 'UTF-8') : ''; ?>" required>
@@ -148,7 +297,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit"><?php echo $isEdit ? 'Update Task' : 'Add Task'; ?></button>
     </form>
+
+    <div class="image-section">
+    <img src="../images/task.png" alt="Illustration of task creation">
+</div>
+
 </main>
+
+
 
 </body>
 </html>

@@ -45,183 +45,261 @@ if ($sharedProjects === false) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Console</title>
-    <link rel="stylesheet" href="../css/mainpage.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Add your CSS styles here */
-        .fab {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #007bff;
-            color: white;
-            font-size: 24px;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .fab:hover {
-            background-color: #0056b3;
-        }
-        .projects-container {
-            margin: 20px;
-        }
-        .project {
-            margin-bottom: 20px;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .project-btn {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            width: 80%;
-            text-align: left;
-        }
-        .trash-icon {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            margin-left: 10px;
-            font-size: 16px;
-        }
-        .trash-icon:hover {
-            background: #c82333;
-        }
-        .tasks-dropdown {
-            display: none;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            position: absolute;
-            width: calc(100% - 20px);
-            left: 10px;
-            top: 100%;
-            z-index: 1;
-        }
-        .tasks-dropdown.show {
-            display: block;
-        }
-        .task {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        .task input[type="checkbox"] {
-            margin-right: 10px;
-        }
-        .edit-task-link {
-            margin-left: 10px;
-            color: #007bff;
-            text-decoration: none;
-        }
-        .edit-task-link:hover {
-            text-decoration: underline;
-        }
-        .add-task-btn {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
-            display: block;
-            margin-top: 10px;
-        }
-        .add-task-btn:hover {
-            background: #218838;
-        }
-        .no-projects {
-            text-align: center;
-        }
-        .no-projects img {
-            max-width: 100%;
-            height: auto;
-        }
-        /* Popup styles */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            align-items: center;
-            justify-content: center;
-        }
-        .popup-content {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-            width: 300px;
-        }
-        .popup-content input {
-            margin-bottom: 10px;
-            padding: 10px;
-            width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .popup-content button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .popup-content button:hover {
-            background: #0056b3;
-        }
-        .popup-content .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
-        }
+        /* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffff;
+    width: 100vw; /* Set the width to 100 viewport width */
+    margin: 0 auto; /* Center the body horizontally */
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden
+}
+
+header {
+    background-color: #fff;
+    padding-top: 50px;
+    margin-top: 15px;
+    padding-bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align content to sides */
+    padding: 0 50px; /* Add padding for spacing */
+}
+
+.logo {
+    height: 100px;
+    margin-left: 50px;
+}
+
+h2 {
+    font-size: 45px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Add space between profile items */
+}
+
+.profile span {
+    margin-right: 10px;
+}
+
+.logout, .trash {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.logout:hover, .trash:hover {
+    background-color: #218838;
+}
+
+main {
+    padding: 20px;
+    text-align: left;
+    margin-left: 200px;
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: -30px;
+}
+
+.project .project-btn {
+    width: 100%;
+    text-align: left;
+    color: black;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.tasks-dropdown {
+    display: none; /* Hide tasks initially */
+    margin-top: 10px;
+}
+
+.project .add-task-btn {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.project .add-task-btn:hover {
+    background-color: #0056b3;
+}
+
+.no-projects {
+    text-align: center;
+    padding: 20px;
+}
+
+.no-projects img {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Floating Action Button */
+.fab {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #28a745;
+    color: white;
+    font-size: 24px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fab:hover {
+    background-color: #218838;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+}
+
+.projects-container {
+    display: flex; /* Flexbox layout for wrapping */
+    flex-wrap: wrap; /* Allow projects to wrap onto new lines if necessary */
+    justify-content: space-between; /* Spread out the projects evenly */
+    gap: 50px; /* Adjust the space between project boxes */
+    max-width: 1200px; /* Increase container width */
+    margin: 0 auto; /* Center the container */
+}
+
+.project {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50%; /* Set width for 3 projects per row */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 1024px) {
+    .project {
+        width: calc(70% - 20px); /* 2 projects per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .project {
+        width: calc(100% - 20px); /* 1 project per row on small screens */
+    }
+}
+footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 5px solid #28a745; /* Green top border */
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 9%;
+    z-index: 0;
+}
+
+
+.task-details {
+    display: flex;
+    flex-direction: column; /* Stack the task name and description vertically */
+}
+
+.task-name {
+    font-weight: bold;
+    margin-bottom: 5px; /* Space below the task name */
+}
+
+.task-desc {
+    margin-top: 5px; /* Space above the task description */
+    color: #666; /* Optional: make the description look different */
+}
+
+
     </style>
 </head>
 <body>
 
 <header>
-    <img src="../images/logo.png" alt="Logo" class="logo">
+    <img src="../images/listaviva-2.svg" alt="Logo" class="logo">
     <div class="profile">
-        <img src="../images/profile.png" alt="Profile Picture" class="avatar">
-        <span>Welcome, <?php echo htmlspecialchars($userName); ?>!</span>
-        <button onclick="location.href='../login/logout.php'" class="logout">Logout</button>
+        <span><?php echo htmlspecialchars($userName); ?></span>
+        <button onclick="location.href='../view/trash.php'" class="logout">Trash</button>
+        <button onclick="location.href='../actions/logout.php'" class="logout">Logout</button>
+        
     </div>
 </header>
 
 <main>
+    <div class="welcome-message">
+        <h2>Welcome, <?php echo htmlspecialchars($userName); ?> 👋</h2>
+    </div>
+</main>
+
+<section>
+<p>Created Projects</p>
     <?php if (empty($projects)): ?>
         <div class="no-projects">
-            <img src="../images/no-projects.png" alt="No Projects Found">
+            <img src="../images/no-task.png" alt="No Projects Found">
             <p>No projects found.</p>
         </div>
     <?php else: ?>
         <div class="projects-container">
             <?php foreach ($projects as $project): ?>
-                
                 <div class="project">
                     <button class="project-btn" onclick="toggleDropdown('<?php echo htmlspecialchars($project['id']); ?>')">
                         <?php echo htmlspecialchars($project['name']); ?>
                     </button>
                     <button class="trash-icon" onclick="confirmDeleteProject(<?php echo htmlspecialchars($project['id']); ?>)">🗑️</button>
                     <button class="trash-icon" onclick="location.href='../view/share.php?project_id=<?php echo htmlspecialchars($project['id']); ?>'">🫶🏼</button>
-                    <div id="<?php echo htmlspecialchars($project['id']); ?>" class="tasks-dropdown">
+                    <div id="tasks-<?php echo htmlspecialchars($project['id']); ?>" class="tasks-dropdown">
                         <!-- Tasks will be dynamically loaded here -->
                         <div class="no-tasks">
                             <p>Select this project to view tasks.</p>
@@ -233,9 +311,37 @@ if ($sharedProjects === false) {
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
+</section>
 
-
-</main>
+<section>
+<p>Shared Projects</p>
+    <?php if (empty($projects)): ?>
+        <div class="no-projects">
+            <img src="../images/no-task.png" alt="No Projects Found">
+            <p>No projects found.</p>
+        </div>
+    <?php else: ?>
+        <div class="projects-container">
+            <?php foreach ($sharedProjects as $sharedProject): ?>
+                <div class="project">
+                    <button class="project-btn" onclick="toggleDropdown('<?php echo htmlspecialchars($sharedProject['id']); ?>')">
+                        <?php echo htmlspecialchars($sharedProject['name']); ?>
+                    </button>
+                    <button class="trash-icon" onclick="confirmDeleteProject(<?php echo htmlspecialchars($sharedProject['id']); ?>)">🗑️</button>
+                    <button class="trash-icon" onclick="location.href='../view/share.php?project_id=<?php echo htmlspecialchars($sharedProject['id']); ?>'">🫶🏼</button>
+                    <div id="tasks-<?php echo htmlspecialchars($sharedProject['id']); ?>" class="tasks-dropdown">
+                        <!-- Tasks will be dynamically loaded here -->
+                        <div class="no-tasks">
+                            <p>Select this project to view tasks.</p>
+                        </div>
+                        <!-- Add Task button will be appended dynamically -->
+                        <button class="add-task-btn" onclick="location.href='../view/task.php?project_id=<?php echo htmlspecialchars($project['id']); ?>'">Add Task</button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</section>
 
 <!-- Floating Action Button to Add Project -->
 <button class="fab" onclick="openPopup()">+</button>
@@ -252,45 +358,20 @@ if ($sharedProjects === false) {
     </div>
 </div>
 
-<div>
-    <p>Shared Projects</p>
-    <?php if (empty($projects)): ?>
-        <div class="no-projects">
-            <img src="../images/no-projects.png" alt="No Projects Found">
-            <p>No projects found.</p>
-        </div>
-    <?php else: ?>
-        <div class="projects-container">
-            <?php foreach ($sharedProjects as $sharedProject): ?>
-                <div class="project">
-                    <button class="project-btn" onclick="toggleDropdown('<?php echo htmlspecialchars($sharedProject['id']); ?>')">
-                        <?php echo htmlspecialchars($sharedProject['name']); ?>
-                    </button>
-                    <button class="trash-icon" onclick="confirmDeleteProject(<?php echo htmlspecialchars($sharedProject['id']); ?>)">🗑️</button>
-                    <button class="trash-icon" onclick="location.href='../view/share.php?project_id=<?php echo htmlspecialchars($sharedProject['id']); ?>'">🫶🏼</button>
-                    <div id="<?php echo htmlspecialchars($sharedProject['id']); ?>" class="tasks-dropdown">
-                        <!-- Tasks will be dynamically loaded here -->
-                        <div class="no-tasks">
-                            <p>Select this project to view tasks.</p>
-                        </div>
-                        <!-- Add Task button will be appended dynamically -->
-                        <button class="add-task-btn" onclick="location.href='../view/task.php?project_id=<?php echo htmlspecialchars($project['id']); ?>'">Add Task</button>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-
-</div>
+<footer>
+    <p>&copy; 2024 ListaVista. All rights reserved.</p>
+</footer>
 
 <script>
+// JavaScript functions remain unchanged
 function toggleDropdown(projectID) {
-    const dropdown = document.getElementById(projectID);
-    if (dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
+    const dropdown = document.getElementById('tasks-' + projectID);
+    if (dropdown.style.display === 'block') {
+        dropdown.style.display = 'none'; // Hide if already visible
         return;
     }
 
+    // Fetch tasks and display
     fetch(`../actions/fetch_tasks.php?project_id=${projectID}`)
         .then(response => response.json())
         .then(data => {
@@ -304,12 +385,16 @@ function toggleDropdown(projectID) {
                         taskDiv.classList.add('task');
                         
                         taskDiv.innerHTML = `
-                            <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTaskCompleted(${task.id})">
-                            <span class="task-name">${task.name}</span>
-                            <span class="task-desc">${task.description.substr(0, 10)}...</span>
-                            <a href="../view/edit_task.php?task_id=${task.id}" class="edit-task-link">Edit</a>
-                        `;
-                        
+    <div class="task">
+        <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTaskCompleted(${task.id})">
+        <div class="task-details">
+            <div class="task-name">${task.name}</div>
+            <div class="task-desc">${task.description.substr(0, 10)}...</div>
+        </div>
+        <a href="../view/edit_task.php?task_id=${task.id}" class="edit-task-link">Edit</a>
+    </div>
+`;
+
                         taskContainer.appendChild(taskDiv);
                     });
                 } else {
@@ -324,7 +409,7 @@ function toggleDropdown(projectID) {
                 
                 taskContainer.appendChild(addTaskButton);
                 
-                dropdown.classList.add('show');
+                dropdown.style.display = 'block'; // Show tasks dropdown
             } else {
                 alert(data.message);
             }
@@ -337,7 +422,7 @@ function toggleDropdown(projectID) {
 
 function toggleTaskCompleted(taskID) {
     fetch(`../actions/toggle_task.php?task_id=${taskID}`)
-        .then(response => response.json())
+    .then(response => response.json())
         .then(data => {
             if (!data.success) {
                 alert('Error updating task status.');
@@ -379,3 +464,4 @@ function closePopup() {
 </script>
 </body>
 </html>
+
