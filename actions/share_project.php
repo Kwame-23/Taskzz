@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 
 include("../settings/connection.php");
-
+// var_dump($_GET['project_id']);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $project_id = $_GET['project_id'];
 
