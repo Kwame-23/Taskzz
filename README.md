@@ -43,12 +43,3 @@
 ## 🙌 Contributing
 
 Contributions that enhance functionality or improve usability are welcome. To propose enhancements or report issues, please open an issue or submit a pull request via the project repository.
-
----
-
-## 📬 Contact
-
-For inquiries, support, or feedback, please use the following contact information:
-
-- **Email:** [your.email@example.com](mailto:your.email@example.com)
-- **GitHub:** [@yourusername](https://github.com/yourusername)
